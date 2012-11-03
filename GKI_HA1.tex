@@ -92,17 +92,17 @@
     	\end{itemize}
     \end{itemize}
     
-Pro Zug wird entweder ein Student ausgewählt, der die nächste Aufgabe übernimmt, oder eine Zeiteinheit (in diesem Fall die Hälfte der durchschnittlichen Bearbeitungszeit) vorangeschritten. Damit die zweite Möglichkeit nur in Frage käme, wenn keine validen Belegungen erster Möglichkeit vorhanden sind, kann man die Aktionskosten der zweiten Möglichkeit entsprechend hoch setzen. So könnte man den Algorithmus auch terminieren lassen, indem man zusätzlich zulässige Höchstkosten definiert. Oder indem man $z$ gegen $0$ prüft und auf valide Belegungen erster Möglichkeit testet. In dieser Form terminiert der Algorithmus erst, wenn er eine valide Belegung für die $a_i$ gefunden hat und $z=0$.
+Pro Zug wird entweder ein Student ausgewählt, der die nächste Aufgabe übernimmt, oder eine Zeiteinheit (in diesem Fall die Hälfte der durchschnittlichen Bearbeitungszeit) vorangeschritten. Damit die zweite Möglichkeit nur in Frage käme, wenn keine validen Belegungen erster Möglichkeit vorhanden sind, kann man die Aktionskosten der zweiten Möglichkeit entsprechend hoch setzen. So könnte man den Algorithmus auch terminieren lassen, indem man zusätzlich zulässige Höchstkosten definiert. Oder indem man $z$ gegen $0$ prüft und auf valide Belegungen erster Möglichkeit testet. In der Form ohne diese Zusätze terminiert der Algorithmus erst, wenn er eine valide Belegung für die $a_i$ gefunden hat und $z=0$.
 
 \subsection*{1.b)}   
 Der Verzweigungsgrad beträgt 4, da wir für die erste Aufgabe 3 Studenten auswählen, oder eine Zeiteinheit verstreichen lassen können.\\
 Ohne andere wie in (1.a) beschriebenen Terminierungsformen ist die maximale Tiefe des Baumes unendlich, da man immer eine Zeiteinheit verstreichen lassen kann.
     
 \subsection*{1.c)}
-Tiefensuche eignet sich nicht da die maximale Tiefe des Baumes unendlich beträgt. Breitensuche würde dagegen gleich eine optimale (d.h. geringste Tiefe) Lösung finden. Best-First-Search (als eigentlich informierte Suche) könnte mithilfe der in 1.b) vorgeschlagenen Aktionskosten sowohl eine optimale Lösung finden, als schneller zu dieser Lösung kommen. 
+Tiefensuche eignet sich nicht da die maximale Tiefe des Baumes unendlich beträgt. Breitensuche würde dagegen eine (nicht unbedingt optimale) Lösung finden. Best-First-Search (als eigentlich informierte Suche) könnte mithilfe der in 1.b) vorgeschlagenen Aktionskosten schneller zu einer Lösung kommen, die aber nicht unbedingt optimal ist.
 
 \subsection*{1.d)}
-Es ist schwierig eine nicht-triviale Heuristik für dieses Problem zu finden, da es ein kombinatorisches Problem ist,
+A* für dieses Problem zu verwenden ist problematisch, da es schwierig ist eine Heuristik zu finden die den optimalen Wert nicht zu weit unterschätzt. So kann man zum Beispiel die Aktionskosten für den Fall, dass $s \in \{1,10,100\}$ auf die jeweiligen Dezimalwerte $1, 2$ und $4$ und die Aktionskosten für den Fall dass $s=0$ auf den höchsten bisherigen Aktionspreis, nämlich $4$ setzen. Wenn man jetzt den Wert, den man erhält wenn man errechnet wie viele Zeiteinheiten man mindestens benötigen würde, wenn alle Studenten so schnell wie der schnellste wären (in diesem Fall 2 Zeiteinheiten), so kommt man hiermit zwar auf eine optimale Lösung, muss aber in ungünstiger Anfangskonstellation einen großen Teil des Baumes durchsuchen.
 
 \section*{Aufgabe 2}
 \subsection*{2.a)}
