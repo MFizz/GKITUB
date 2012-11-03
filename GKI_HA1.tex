@@ -1,0 +1,111 @@
+\documentclass[a4paper]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{polynom}
+\usepackage{pgf,tikz}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathcomp}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{dsfont}
+\usepackage{
+    amscd,
+    amsfonts,
+    amsmath,
+    amssymb,
+    amsthm,
+}
+\usepackage{tikz}
+\usepackage{ stmaryrd }
+\usepackage{ulsy}
+
+\usetikzlibrary{trees,decorations,arrows,automata,shadows,positioning,plotmarks}
+
+\geometry{left=2cm, top=1.5cm, right=2cm, bottom=2cm}
+
+\begin{document}
+
+  \begin{flushright}
+    01.11.2012
+  \end{flushright}
+  \begin{center}
+    \Large\textbf{{GKI - Hausaufgaben 1}}\\
+  \end{center}
+
+  \begin{center}
+        \large\textsl{Tao Xu,  - Mitja Richter, 324680}\\
+  \end{center}
+
+
+\section*{Aufgabe 1}
+\subsection*{1.a)}
+
+	\begin{itemize}
+    	\item[] Zustandsraum: \\
+    	$S = (a_1, a_2, a_3, a_4, a_5, z), a_i \in \{0, 1, 10, 100\}$ und $z \in [0,127]$ \\
+    	wobei $a_i$ für die jeweils zu bearbeitende Aufgabe steht und $0,1, 10, 100$ für unbearbeitet(0), Alfons(1), Bernd(10) und Christine(100) (als bearbeitende Personen). $Z$ stehen für die noch aufzuwendende Bearbeitungszeit von Alfons, Bernd und Christine. Es wird also ein 6-stelliges 7bit-Array benötigt.
+    	
+    	\item[] Startzustand:\\
+    	$S_0 = (0,0,0,0,0,0)$
+    	
+    	\item[] Zielzustand:\\
+    	$S_Z = (a^{Z}_1,a^{Z}_2,a^{Z}_3,a^{Z}_4,a^{Z}_5,z^Z)$, mit $a^{Z}_i \neq 0$ und $z^Z=0$
+    	
+    	\item[] Aktionen: Die Auswahl des Studenten der die nächste noch nicht bearbeitete Aufgabe bearbeiten soll. Dargestellt mithilfe der Überführungsfunktion $wahl$ mit dem Parameter Student ($s$).\\
+    	$wahl(s):S = (a_1, a_2, a_3, a_4, a_5, z)\rightarrow S' = (a'_1, a'_2, a'_3, a'_4, a'_5, z'), s \in \{0,1,10,100\}$\\
+    	sodass gilt wenn $s \in \{1,10,100\}$ (d.h. wenn ein Student für eine Aufgabe ausgewählt wird):
+    	\begin{itemize}%
+    	\item[] sei $a_j$ das erste $a_i \neq 0$ für mit $<$ geordneten $i$ und $/$ die Ganzzahldivision
+    	
+		\item[•] $\forall a'_i, i \neq j$. $a'_i=a_i$   	
+    	
+    	\item[•] $a_j' = s$ \qquad (Belegen der Aufgabe mit Alfons(1), Bernd(10) oder Christine(100))
+    	
+    	\item[•] $z' = s+z$ \qquad (Bilden der neuen Bearbeitungszeit)
+    	  	
+    	\item[•] $\frac{z'}{100} \leq 1$ \qquad (Christine darf nicht zwei Aufgaben gleichzeitig machen)
+    	
+    	\item[•] $\frac{(z' \bmod 100)}{10} \leq 2$ \qquad (Bernd darf nicht zwei Aufgaben gleichzeitig machen)
+    	
+    	\item[•] $((z' \bmod 100) \bmod 10)\leq 4$ \qquad (Alfons darf nicht zwei Aufgaben gleichzeitig machen)  	
+  	
+    	\item[•] $a_1' \neq 100$ \qquad (Christine kann Aufgabe 1 nicht)
+    	
+    	\item[•] $a_3' \neq 100 \wedge a_3' \neq 10$ \qquad (Christine und Bernd können Aufgabe 3 nicht)
+    	
+    	\item[•] $a_4' \neq 100$ \qquad (Christine kann Aufgabe 4 nicht)
+    	\end{itemize}
+    und wenn $s = 0$(d.h. wenn kein neuer Student ausgewählt wird):
+    	\begin{itemize}%	
+    	
+    	\item[•] $\forall a'_i$. $a'_i=a_i$
+    	
+    	\item[•] $z' = z-sgn(\frac{t}{100})\cdot 100-sgn(\frac{(z \bmod 100)}{10})\cdot 10 - sgn((z \bmod 100) \bmod 10$ \qquad (sgn steht hier für Signumfunktion; in diesem Schritt vergeht die Hälfte der durchschnittlichen Bearbeitungszeit)
+    	\end{itemize}
+    \end{itemize}
+    
+Pro Zug wird entweder ein Student ausgewählt, der die nächste Aufgabe übernimmt, oder eine Zeiteinheit (in diesem Fall die Hälfte der durchschnittlichen Bearbeitungszeit) vorangeschritten. Damit die zweite Möglichkeit nur in Frage käme, wenn keine validen Belegungen erster Möglichkeit vorhanden sind, kann man die Aktionskosten der zweiten Möglichkeit entsprechend hoch setzen. So könnte man den Algorithmus auch terminieren lassen, indem man zusätzlich zulässige Höchstkosten definiert. Oder indem man $z$ gegen $0$ prüft und auf valide Belegungen erster Möglichkeit testet. In dieser Form terminiert der Algorithmus erst, wenn er eine valide Belegung für die $a_i$ gefunden hat und $z=0$.
+
+\subsection*{1.b)}   
+Der Verzweigungsgrad beträgt 4, da wir für die erste Aufgabe 3 Studenten auswählen, oder eine Zeiteinheit verstreichen lassen können.\\
+Ohne andere wie in (1.a) beschriebenen Terminierungsformen ist die maximale Tiefe des Baumes unendlich, da man immer eine Zeiteinheit verstreichen lassen kann.
+    
+\subsection*{1.c)}
+Tiefensuche eignet sich nicht da die maximale Tiefe des Baumes unendlich beträgt. Breitensuche würde dagegen gleich eine optimale (d.h. geringste Tiefe) Lösung finden. Best-First-Search (als eigentlich informierte Suche) könnte mithilfe der in 1.b) vorgeschlagenen Aktionskosten sowohl eine optimale Lösung finden, als schneller zu dieser Lösung kommen. 
+
+\subsection*{1.d)}
+Es ist schwierig eine nicht-triviale Heuristik für dieses Problem zu finden, da es ein kombinatorisches Problem ist,
+
+\section*{Aufgabe 2}
+\subsection*{2.a)}
+
+
+\end{document}
