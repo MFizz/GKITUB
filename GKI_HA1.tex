@@ -27,20 +27,24 @@
 \usepackage{ stmaryrd }
 \usepackage{ulsy}
 
+\newcommand{\IR}{\mathbb{R}}
+
 \usetikzlibrary{trees,decorations,arrows,automata,shadows,positioning,plotmarks}
 \geometry{left=2cm, top=1.5cm, right=2cm, bottom=2cm}
+
+\parindent0pt
 
 \begin{document}
 
   \begin{flushright}
-    01.11.2012
+    \today
   \end{flushright}
   \begin{center}
     \Large\textbf{{GKI - Hausaufgaben 1}}\\
   \end{center}
 
   \begin{center}
-        \large\textsl{Tao Xu, 343390 - Mitja Richter, 324680, - Björn Kapelle, 320438}\\
+        \large\textsl{Tao Xu, 343390 - Mitja Richter, 324680 - Björn Kapelle, 320438 - Marcus Weber, 320402}\\
   \end{center}
 
 
@@ -102,6 +106,66 @@ Tiefensuche eignet sich nicht da die maximale Tiefe des Baumes unendlich beträg
 
 \subsection*{1.d)}
 A* für dieses Problem zu verwenden ist problematisch, da es schwierig ist eine Heuristik zu finden die den optimalen Wert nicht zu weit unterschätzt. So kann man zum Beispiel die Aktionskosten für den Fall, dass $s \in \{1,10,100\}$ auf die jeweiligen benötigten Zeiteinheiten $1, 2$ und $4$ und die Aktionskosten für den Fall dass $s=0$ auf den höchsten bisherigen Aktionspreis, nämlich $4$ setzen. Wenn man jetzt den Wert, den man erhält wenn man errechnet wie viele Zeiteinheiten man mindestens benötigen würde, wenn alle Studenten so schnell wie der schnellste wären (in diesem Fall 2 Zeiteinheiten; 3 Studenten im ersten Durchgang 2 im zweiten), so kommt man hiermit zwar auf eine optimale Lösung, muss aber in ungünstiger Anfangskonstellation einen großen Teil des Baumes durchsuchen.
+
+\section*{Aufgabe 5}
+Bei den Aufgaben a) bis c) ist die Zul\"assigkeit verschiedener Metriken als Heuristik zu zeigen. Eine Heuristik $h$ ist zul\"assig, wenn $0 = h(X) = h^\ast(X)$ f\"ur alle Knoten $X$, wobei $h^\ast$ die tats\"achlichen Kosten bezeichnet.
+
+\subsection*{5.a)}
+Wir betrachten als heuristische Funktion $h$ die euklidische Metrik. Die euklidische Metrik ist definiert als $d_{eukl}(x,y) = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2} $, wobei $x:=(x_1,y_1)$ und $y:=(x_2,y_2)$. 
+
+Da $(x_2-x_1)^2+(y_2-y_1)^2\geq0$, $\forall x_1,x_2,y_1,y_2 \in \IR$, ist die Wurzel dieses Terms definiert und da diese wiederum ein nichtnegatives Ergebnis ausgibt gilt: $0 \leq h(X)$ f\"ur alle m\"oglichen zweidimensionalen Koordinaten (L\"angen- und Breitengrade). Zudem beschreibt die euklidische Metrik die Luftlinienentfernung zwischen zwei Punkten, somit gilt auch: $h(X) \leq h^\ast(X) \Rightarrow$ die euklidische Metrik ist zul\"assig.
+
+\subsection*{5.b)}
+Wir betrachten als heuristische Funktion $h$ die Maximum-Metrik.
+
+Da $|x_2-x_1| \geq 0$ und $|y_2-y_1| \geq 0$, $\forall x_1,x_2,y_1,y_2 \in \IR$, ist $\max(|x_2-x_1|,|y_2-y_1|)$ ebenfalls nichtnegativ. Somit gilt: $0 \leq h(X)$ f\"ur alle m\"oglichen zweidimensionalen Koordinaten (L\"angen- und Breitengrade).
+
+Zudem gilt: $d_{max}(x,y) \leq d_{eukl}(x,y)$ (siehe d.) und somit gilt auch $h(X) \leq h^\ast(X) \Rightarrow$ die Maximum-Metrik ist zul\"assig.
+
+\subsection*{5.c)}
+Wir betrachten als heuristische Funktion $h$ die Manhattan-Metrik.
+
+Diese Metrik ist nicht zul\"assig. Dies zeigen wir durch ein Beispiel an dem man erkennen kann, dass die Manhattan-Metrik f\"ur unser Problem die tats\"achlichen Kosten \"ubersch\"atzen kann. Dazu seien zwei St\"adte an den Koordinaten (0,0) und (1,1) die auf direktem Weg (Luftlinie) miteinander durch eine Stra{\ss}e verbunden sind.
+Die Entfernung zwischen diesen St\"adten ist demnach $\sqrt{2}$, aber die Manhattan-Metrik gibt $|1 - 0| + |1 - 0| = 2$ als Ergebnis aus. Somit ist die Manhattan-Metrik f\"ur unser Beispiel nicht zul\"assig.
+
+\subsection*{5.d)}
+F\"ur gegebene reelle Wertepaare $x:=(x_1,y_1)$ und $y:=(x_2,y_2)$ gilt:
+$d_{max}(x,y) \stackrel{1.}{\leq} d_{eukl}(x,y) \stackrel{2.}{\leq} d_{man}(x,y)$\\
+\\
+Beweis 1.: Ohne Beschr\"ankung der Allgemeinheit sei: $d_{max}(x,y) = \max(|x_2- x_1|,|y_2- y_1|) = |x_2- x_1|$.
+(Der andere Fall w\"urde genau analog verlaufen)
+
+$|x_2-x_1|=\sqrt{(|x_2-x_1|)^2}=\sqrt{(x_2-x_1)^2}\leq\sqrt{(x_2-x_1)^2+ (y_2-y_1)^2}$
+
+Der vorletzte Schritt ergibt sich aus der Tatsache, dass $(x_2-x_1)^2\geq0$ und somit der
+Betrag hinf\"allig ist. Der letzte Schritt ergibt sich aus der Monotonie der Wurzelfunktion
+und der Tatsache, dass $(x_2- x_1)^2+(y_2- y_1)^2\geq(x_2- x_1)^2$.\\
+\\
+Beweis 2.: Seien $a,b \in \IR^+_0$. Dann gilt: $a^2+ b^2= a^2+ 2ab + b^2= (a + b)^2$ und somit $\sqrt{a^2+b^2}\leq\sqrt{(a + b)^2} \stackrel{a,b\geq0}{=}(a + b)$ (Es wurde wieder die Monotonie der Wurzelfunktion
+benutzt).
+
+Sei nun $a := |x_2- x_1| \geq 0$ und $b :=|y_2- y_1| \geq 0$ und damit folgt die Behauptung.
+
+\subsection*{5.e)}
+Die Manhattan-Metrik ist nicht die geeignetste, da sie nicht zul\"assig ist und da die euklidische Metrik die Maximum-Metrik dominiert, ist die euklidische Metrik f\"ur unser Problem die geeignetste, da ihre Werte n\"aher an den tats\"achlichen Kosten liegen.
+
+\subsection*{5.f)}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\columnwidth]{aufgabe5f}
+\end{figure}
+
+
+An diesem Beispiel kann man sehen, dass wenn man den Algorithmus durchf\"uhren m\"ochte, um einen k\"urzesten Weg von D nach A zu finden, man alle beiden Wege \"uberpr\"ufen wird. Allerdings w\"urde man dies nicht tun, wenn statt -6 als heuristischer Wert 0 eingesetzt werden w\"urde, da der Gesamtwert nicht mehr 4 sondern 10 w\"are und somit in Anbetracht der Gesamtkosten des Pfades A-C-D gar nicht gepr\"uft werden m\"usste. Bei gr\"o{\ss}eren Beispielen kann dies zu erheblichen Teilpfaden f\"uhren, die man weglassen k\"onnte und somit effektiver arbeiten.
+
+\subsection*{5.g)}
+Die Vollst\"andigkeit des Algorithmus ist weiterhin gegeben, da wenn ein Pfad nicht zu einem Zielknoten f\"ihrt, ein anderer gepr\"uft werden w\"urde und dies so lange bis mindestens ein Punkt erreicht wird an dem Start- und Zielknoten wie gew\"unscht sind. Sollte kein
+derartiger Pfad existieren, kann der Algorithmus keinen Pfad finden und von daher kann man solche F\"alle vernachl\"assigen.
+
+Die Optimalit\"at wird ebenfalls nicht beeintr\"achtigt, da die heuristische Werte nur Sch\"atzwerte sind, die ein schnelleres Finden des besten Weges erm\"oglichen sollen. Wenn wir negative heuristische Werte zulassen, finden wir den gew\"unschten Weg evtl. nicht schneller, aber solange wir Heuristiken benutzen, die die tats"achlichen Kosten untersch\"atzen, erreichen wir trotzdem die beste L\"osung.
+
+Dies gilt, weil f\"ur die Gesamtkosten der Wege am Ende die heuristischen Werte keinen Einfluss haben. Die \"Uberpr\"ufung anderer - vielleicht besserer - Wege wird gew\"ahrleistet durch die Untersch\"atzung, denn somit wird kein potenzieller Weg durch die heuristischen Werte als "`nicht weiter zu \"uberpr\"ufen"' gekennzeichnet.
 
 \section*{Aufgabe 6}
 \subsection*{6.a)}
