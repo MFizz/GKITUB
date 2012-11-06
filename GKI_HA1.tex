@@ -103,9 +103,59 @@ Tiefensuche eignet sich nicht da die maximale Tiefe des Baumes unendlich beträg
 \subsection*{1.d)}
 A* für dieses Problem zu verwenden ist problematisch, da es schwierig ist eine Heuristik zu finden die den optimalen Wert nicht zu weit unterschätzt. So kann man zum Beispiel die Aktionskosten für den Fall, dass $s \in \{1,10,100\}$ auf die jeweiligen benötigten Zeiteinheiten $1, 2$ und $4$ und die Aktionskosten für den Fall dass $s=0$ auf den höchsten bisherigen Aktionspreis, nämlich $4$ setzen. Wenn man jetzt den Wert, den man erhält wenn man errechnet wie viele Zeiteinheiten man mindestens benötigen würde, wenn alle Studenten so schnell wie der schnellste wären (in diesem Fall 2 Zeiteinheiten; 3 Studenten im ersten Durchgang 2 im zweiten), so kommt man hiermit zwar auf eine optimale Lösung, muss aber in ungünstiger Anfangskonstellation einen großen Teil des Baumes durchsuchen.
 
-\section*{Aufgabe 2}
-\subsection*{2.a)}
+\section*{Aufgabe 6}
+\subsection*{6.a)}
+w=weiß, g=grau, s=schwarz\\
+\begin{tabular}{|c | c | c |c | c | c |}
+\hline
+  Schritt & A & B & C & D & E \\
+  \hline
+\hline
+Startbelegung &  w & w  & w & w  & w  \\
 
+Startkonflikte(10) &  w(10)g(7)s(7) & w(10)\textbf{g(6)},s(6)  & w(10)g(7)s(7) & w(10)g(7)s(7)  & w(10)g(7)s(7)  \\
+  \hline
+      1 &  w & g  & w & w  & w  \\
 
+  (6)&  w(6)g(5)\textbf{s(4)} & w(10)g(6),s(6)  & w(6)g(5)s(4) &w(6)g(5)s(4)&w(6)g(5)s(4)  \\
+  \hline
+    2 &  s & g  & w & w  & w  \\
+
+   (4)&  w(6)g(5)s(4) & w(7)g(4)s(5)  & w(4)g(3)\textbf{s(2)} &w(4)g(4)s(4)&w(4)g(3)s(2)  \\
+    \hline
+  3 &  s & g  & s & w  & w  \\
+   (2)& w(4)g(3)s(2) & w(4)g(2)s(3) & w(4)g(3)s(2) &w(2)g(2)s(2)  &w(2)g(2)s(2)   \\
+    \hline
+  4 &  s & g  & s & w  & w  \\
+   (1)& w(2)g(2)s(1)  & w(3)g(1)s(3)  & w(2)g(2)s(1) & w(1)g(1)s(1) & w(1)g(1)s(1) \\
+    \hline
+ \end{tabular}\\ 
+ \begin{tabular}{|c | c | c |}
+ \hline
+   Schritt & F & G \\
+   \hline
+ \hline
+     Startbelegung &  w & w \\
+   Startkonflikte(10) &  w(10)g(8)s(8) & w(10)g(8)s(8)\\
+   \hline
+   1 &  w & w \\
+    (6)&  w(6)g(4)s(4) & w(6)g(4)s(4)  \\
+     \hline
+   2 &  w & w \\
+    (4)&  w(4)g(3)s(4) & w(4)g(2)s(2)  \\
+     \hline
+   3 &  w & w \\
+    (2)&  w(2)\textbf{g(1)}s(2) & w(2)g(1)s(2)  \\
+     \hline
+   4 &  g & w \\
+    (1)&  w(2)g(1)s(2) & w(1)g(2)s(2)  \\
+     \hline
+  \end{tabular}\\
+  
+  
+  Das Ergebnis hat immer noch einen Konflikt, d.h. der Algorithmus ist zu keiner Lösung gekommen.
+  
+\subsection*{6.b)}
+Die Tie-Break-Regel zu benutzen, die den höchsten lexikographischen Folgezustand bevorzugt funktioniert in diesem Fall, da
 
 \end{document}
