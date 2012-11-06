@@ -220,6 +220,10 @@ Startkonflikte(10) &  w(10)g(7)s(7) & w(10)\textbf{g(6)},s(6)  & w(10)g(7)s(7) &
   Das Ergebnis hat immer noch einen Konflikt, d.h. der Algorithmus ist zu keiner Lösung gekommen.
   
 \subsection*{6.b)}
-Die Tie-Break-Regel zu benutzen, die den höchsten lexikographischen Folgezustand bevorzugt funktioniert in diesem Fall, da
+Die Tie-Break-Regel muss dahingehend ge\"andert werden, dass sie den den höchsten lexikographischen Folgezustand bevorzugt.\\
+\\
+In 6.a) ist das Problem, dass sehr fr\"uh A und C belegt werden. Dann ist aber D durch A und B festgelegt und E ist durch B und C festgelegt. Die Constraintverletzung zwischen D und E kann dann nicht mehr in einem Schritt gel\"ost werden und die lokale Suche bleibt somit in einem lokalen Minimum stecken.
+
+Die ge\"anderte Tie-Break-Regel belegt nun hingegen A und C sp\"ater und daf\"ur E fr\"uher. Somit kommt es zu keinem Konflikt zwischen D und E. Die sp\"atere Belegung von A und C f\"uhrt zu keinen Problemen, denn deren Konflikte mit F bzw. G k\"onnen immer in einem Schritt gel\"ost werden, da F und G nur zwei Constraints haben.
 
 \end{document}
