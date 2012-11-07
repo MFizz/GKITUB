@@ -115,10 +115,11 @@ Eine weitere Voraussetzung ist, dass die Waggons immer so weit in den Gleisst\"u
 Die Aktionskosten belaufen sich bei allen Aktionen auf 1, da wir m\"oglichst wenig Waggons verschieben wollen und jede Verschiebung gleich aufwendig ist.
 
 \subsection*{2.b)}
+hier fehlt noch das bild
 
 \subsection*{2.c)}
 Der Verweigungsgrad ist die maximale Anzahl an Nachfolgerknoten f\"ur irgendeinen Knoten in unserem Suchbaum. Die Nachfolgeknoten entsprechen aber den Folgezust\"anden. Die maximale Anzahl an Folgezust\"anden ist 12, dies erhalten wir, wenn in jedem Gleisst\"uck ein Waggon liegt. Dann ist n\"amlich jede Aktion durchf\"uhrbar. Somit ist der Verzweigungsgrad 12.
-Die Tiefe des Baumes ist nicht ohne weiteres zu benennen, aber wir kennen mit Gewissheit eine obere Schranke und zwar gilt: $Tiefe des Suchbaums \le \binom{10}{4} 4! = 5040$. Dies ergibt sich wenn wir alle erdenkbaren Zust\"ande (egal ob f\"ur uns zul\"assig oder nicht) nacheinander erhalten würden. Dabei beschreibt $\tbinom{10}{4}$ die Anzahl der verschiedenen besetzten Positionen auf allen Gleisst\"ucken und $4!$ beschreibt die unterschiedliche Positionierung der 4 Waggons auf den Positionen. Da wir Zykel nicht zulassen werden wollen erreichen wir auch keine gr\"oßere Tiefe.
+Die Tiefe des Baumes ist nicht ohne weiteres zu benennen, aber wir kennen mit Gewissheit eine obere Schranke und zwar gilt: $Tiefe des Suchbaums \le \binom{10}{4} 4! = 5040$. Dies ergibt sich wenn wir alle erdenkbaren Zust\"ande (egal ob f\"ur uns zul\"assig oder nicht) nacheinander erhalten würden. Dabei beschreibt $\tbinom{10}{4}$ die Anzahl der verschiedenen besetzten Positionen auf allen Gleisst\"ucken und $4!$ beschreibt die unterschiedliche Positionierung der 4 Waggons auf den Positionen. Da wir Zykel nicht zulassen wollen, erreichen wir auch keine gr\"o{\ss}ere Tiefe.
 
 \subsection*{2.d)}
 Je nachdem auf was man Wert legt, ist entweder die Tiefensuche oder die Breitensuche besser. Der zeitliche Aufwand ist bei der Breitensuche besser, da diese $b^d$, wobei $b$ dem Verzweigungsgrad entspricht und $d$ der Tiefe der optimalen L\"osung entspricht. Dabei ist zu erw\"ahnen, dass die Tiefe der optimalen L\"osung die minimale Tiefe des Zielzustands ist. Diese ist mit Sicherheit kein Blatt, da es 3 Vorg\"angerzust\"ande gibt, die zum Zielzustand f\"uhren k\"onnen und alle drei nicht vorher besucht werden bei einer optimalen L\"osung.
