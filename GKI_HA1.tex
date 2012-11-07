@@ -109,17 +109,21 @@ A* für dieses Problem zu verwenden ist problematisch, da es schwierig ist eine 
 
 \section*{Aufgabe 2}
 \subsection*{2.a)}
-F\"ur die Formulierung eines Suchproblems brauchen wir einen Startzustand, einen Zielzustand, Aktionen und Aktionskosten. Unsere Zustände sind Vektoren der Form $(A_1,A_2,B_1,B_2,B_3,B_4,C_1,C_2,D_1,D_2)$ wodurch gekennzeichnet werden kann welcher Waggon auf welchem Stellplatz ist, $1,2,3,4$ f\"ur die 4 Waggons und 0 bedeutet, dass der Stellplatz aktuell leer ist.. Der Startzustand ist $(0,0,2,4,3,1,0,0,0,0)$. Der Zielzustand ist $(0,0,1,2,3,4,0,0,0,0)$. Die Aktionen, die wir durchf\"uhren k\"onnen sind abh\"angig von dem aktuellen Zustand in dem wir uns befinden. Die Aktionen haben aber gemeinsam, dass sie jeweils die Bewegung eines Waggons auf ein anderes Gleisst\"uck beschreiben.
-Wir unterscheiden die Aktionen Move(X,Y) mit $X,Y in \{A,B,C,D\}$ und $X \not= Y$. Mit den verschiedenen Kombinationsmöglichkeiten erhalten wir 12 verschiedene Aktionen. Dabei stellen wir allerdings einige Vorbedingungen damit eine Aktion auch durchf\"uhrbar ist. So muss mindestens ein $X_i \not= 0,i in \{1,2\}, falls X gleich A,B oder C ist, und falls X gleich B so i in \{1,2,3,4\}$ sein und mindestens ein $Y_i = 0, wobei i wie vorher$.
+F\"ur die Formulierung eines Suchproblems brauchen wir einen Startzustand, einen Zielzustand, Aktionen und Aktionskosten. Unsere Zustände sind Vektoren der Form $(A_1,A_2,B_1,B_2,B_3,B_4,C_1,C_2,D_1,D_2)$ wodurch gekennzeichnet werden kann welcher Waggon auf welchem Stellplatz ist, $1,2,3,4$ f\"ur die 4 Waggons und 0 bedeutet, dass der Stellplatz aktuell leer ist. Der Startzustand ist $(0,0,2,4,3,1,0,0,0,0)$. Der Zielzustand ist $(0,0,1,2,3,4,0,0,0,0)$. Die Aktionen, die wir durchf\"uhren k\"onnen sind abh\"angig von dem aktuellen Zustand in dem wir uns befinden. Die Aktionen haben aber gemeinsam, dass sie jeweils die Bewegung eines Waggons auf ein anderes Gleisst\"uck beschreiben.
+Wir unterscheiden die Aktionen Move(X,Y) mit $X,Y \in \{A,B,C,D\}$ und $X \not= Y$. Mit den verschiedenen Kombinationsmöglichkeiten erhalten wir 12 verschiedene Aktionen. Dabei stellen wir allerdings einige Vorbedingungen damit eine Aktion auch durchf\"uhrbar ist. So muss mindestens ein $X_i \not= 0, i \in \{1,2\}$, falls $X$ gleich $A,B$ oder $C$ ist, und falls $X$ gleich $B$ soll $i \in \{1,2,3,4\}$ sein und mindestens ein $Y_i = 0$, wobei $i$ wie vorher.
 Eine weitere Voraussetzung ist, dass die Waggons immer so weit in den Gleisst\"ucken durchrutschen wie m\"oglich, d.h. z.B. ist der Zustand $(0,1,0,2,3,4,0,0,0,0)$ nicht erlaubt.
 Die Aktionskosten belaufen sich bei allen Aktionen auf 1, da wir m\"oglichst wenig Waggons verschieben wollen und jede Verschiebung gleich aufwendig ist.
 
 \subsection*{2.b)}
-hier fehlt noch das bild
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\columnwidth]{aufgabe2b}
+\end{figure}
 
 \subsection*{2.c)}
 Der Verweigungsgrad ist die maximale Anzahl an Nachfolgerknoten f\"ur irgendeinen Knoten in unserem Suchbaum. Die Nachfolgeknoten entsprechen aber den Folgezust\"anden. Die maximale Anzahl an Folgezust\"anden ist 12, dies erhalten wir, wenn in jedem Gleisst\"uck ein Waggon liegt. Dann ist n\"amlich jede Aktion durchf\"uhrbar. Somit ist der Verzweigungsgrad 12.
-Die Tiefe des Baumes ist nicht ohne weiteres zu benennen, aber wir kennen mit Gewissheit eine obere Schranke und zwar gilt: $Tiefe des Suchbaums \le \binom{10}{4} 4! = 5040$. Dies ergibt sich wenn wir alle erdenkbaren Zust\"ande (egal ob f\"ur uns zul\"assig oder nicht) nacheinander erhalten würden. Dabei beschreibt $\tbinom{10}{4}$ die Anzahl der verschiedenen besetzten Positionen auf allen Gleisst\"ucken und $4!$ beschreibt die unterschiedliche Positionierung der 4 Waggons auf den Positionen. Da wir Zykel nicht zulassen wollen, erreichen wir auch keine gr\"o{\ss}ere Tiefe.
+Die Tiefe des Baumes ist nicht ohne weiteres zu benennen, aber wir kennen mit Gewissheit eine obere Schranke und zwar gilt: Tiefe des Suchbaums $\le \binom{10}{4} 4! = 5040$. Dies ergibt sich wenn wir alle erdenkbaren Zust\"ande (egal ob f\"ur uns zul\"assig oder nicht) nacheinander erhalten würden. Dabei beschreibt $\tbinom{10}{4}$ die Anzahl der verschiedenen besetzten Positionen auf allen Gleisst\"ucken und $4!$ beschreibt die unterschiedliche Positionierung der 4 Waggons auf den Positionen. Da wir Zykel nicht zulassen wollen, erreichen wir auch keine gr\"o{\ss}ere Tiefe.
 
 \subsection*{2.d)}
 Je nachdem auf was man Wert legt, ist entweder die Tiefensuche oder die Breitensuche besser. Der zeitliche Aufwand ist bei der Breitensuche besser, da diese $b^d$, wobei $b$ dem Verzweigungsgrad entspricht und $d$ der Tiefe der optimalen L\"osung entspricht. Dabei ist zu erw\"ahnen, dass die Tiefe der optimalen L\"osung die minimale Tiefe des Zielzustands ist. Diese ist mit Sicherheit kein Blatt, da es 3 Vorg\"angerzust\"ande gibt, die zum Zielzustand f\"uhren k\"onnen und alle drei nicht vorher besucht werden bei einer optimalen L\"osung.
@@ -148,6 +152,49 @@ Das ergibt für den Overhead $\approx 2,8\%$
 
 \subsection*{3.c)}
 Je höher der Verzweigungsfaktor ist, desto kleiner ist der Overhead. Also eignet sich iterative Tiefensuche eher bei hohem Verzweigungsfaktor. Dieser Effekt kommt daher, dass bei Bäumen mit hohem Verzweigungsfaktor die Knoten in der maximale Tiefe (also den noch nicht erzeugten Knoten), einen sehr großen Teil des Baumes ausmachen. Je mehr Iteration man macht, desto größer wird dieser Anteil.
+
+\section*{Aufgabe 4}
+
+\subsection*{4.a)}
+\begin{tabular}{|c | l | l |l |}
+\hline
+  Schritt & Expandierter Knoten & Queue & Anmerkungen\\
+\hline
+\hline
+1 &  A(35)   & AC(30), AB(40)           & keine\\
+\hline
+2 &  AC(30)  & ACZ(35), AB(40), ACD(40) & ACA entfernt (Zykel)\\
+  &          &                          & ACB(65) entfernt (DP)\\
+\hline
+3 &  ACZ(35) & -                        & Algorithmus terminiert\\
+\hline
+\end{tabular}\\ 
+
+\subsection*{4.b)}
+$A^\ast$ liefert nur dann mit Sicherheit die optimale L\"osung, wenn die zugrundeliegende Heuristik zul\"assig ist. In unserem Fall ist die Heuristik nicht zul\"assig, denn sie \"ubersch\"atzt die Kosten f\"ur A ($35>30$) und f\"ur B ($35>25$). Und in der Tat erhalten wir nicht das optimale Ergebnis.
+
+\subsection*{4.c)}
+Wir \"andern die Heuristik f\"ur A und f\"ur B, so dass $h(A)=25$ und $h(B)=20$ gilt. Dann folgt:\\
+\\
+\begin{tabular}{|c | l | l |l |}
+\hline
+  Schritt & Expandierter Knoten & Queue & Anmerkungen\\
+\hline
+\hline
+1 & A(25)    & AB(25), AC(30)    & keine\\
+\hline
+2 & AB(25)   & ABC(25), ABD(30)  & ABA entfernt (Zykel)\\
+  &          &                   & AC(30) entfernt (DP)\\
+\hline
+3 & ABC(25)  & ABCZ(30), ABD(30) & ABCA entfernt (Zykel)\\
+  &          &                   & ABCB entfernt (Zykel)\\
+  &          &                   & ABCD(35) entfernt (DP)\\
+\hline
+4 & ABCZ(30) & -                 & Algorithmus terminiert\\
+\hline
+\end{tabular}\\
+\vspace{10pt}\\
+Die Heuristik ist jetzt zul\"assig und $A^\ast$ liefert die optimale L\"osung.
 
 \section*{Aufgabe 5}
 Bei den Aufgaben a) bis c) ist die Zul\"assigkeit verschiedener Metriken als Heuristik zu zeigen. Eine Heuristik $h$ ist zul\"assig, wenn $0 = h(X) = h^\ast(X)$ f\"ur alle Knoten $X$, wobei $h^\ast$ die tats\"achlichen Kosten bezeichnet.
