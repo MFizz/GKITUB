@@ -116,12 +116,12 @@ Da jede Iteration teilweise gleiche Knoten aufgespannt werden müssen wirkt sich
 Die Formel für alle generierten Knoten der Iterativen Tiefensuche ist:\\
 $N_{ITS}=\sum\limits_{i=0}^{d} (d+1-i)b^i$, mit d = Tiefe und b=Verzweigung\\
 Einsetzen ergibt:\\
-$\sum\limits_{i=0}^{5^5} (5^5+1-i)35^i \approx 1,08 \cdot 10^193$\\
+$N_{ITS}=\sum\limits_{i=0}^{5^5} (5^5+1-i)35^i \approx 1,08 \cdot 10^{193}$\\
 
 Für die limitierte Tiefensuche gilt:\\
 $N_{LTS}=\sum\limits_{i=0}^{d} b^i$\\
 Einsetzen ergibt:\\
-$\sum\limits_{i=0}^{5^5} 35^i \approx 1,05 \cdot 10^193$\\
+$N_{LTS}=\sum\limits_{i=0}^{5^5} 35^i \approx 1,05 \cdot 10^{193}$\\
 
 Das ergibt für den Overhead $\approx 2,8\%$
 
