@@ -107,6 +107,27 @@ Tiefensuche eignet sich nicht da die maximale Tiefe des Baumes unendlich beträg
 \subsection*{1.d)}
 A* für dieses Problem zu verwenden ist problematisch, da es schwierig ist eine Heuristik zu finden die den optimalen Wert nicht zu weit unterschätzt. So kann man zum Beispiel die Aktionskosten für den Fall, dass $s \in \{1,10,100\}$ auf die jeweiligen benötigten Zeiteinheiten $1, 2$ und $4$ und die Aktionskosten für den Fall dass $s=0$ auf den höchsten bisherigen Aktionspreis, nämlich $4$ setzen. Wenn man jetzt den Wert, den man erhält wenn man errechnet wie viele Zeiteinheiten man mindestens benötigen würde, wenn alle Studenten so schnell wie der schnellste wären (in diesem Fall 2 Zeiteinheiten; 3 Studenten im ersten Durchgang 2 im zweiten), so kommt man hiermit zwar auf eine optimale Lösung, muss aber in ungünstiger Anfangskonstellation einen großen Teil des Baumes durchsuchen.
 
+\section*{Aufgabe 3}
+\subsection*{3.a)}
+Die Iterative Tiefensuche startet bei einem Wurzelknoten und führt dort im ersten Schritt eine limitierte Tiefensuche mit minimaler Suchtiefe. In jedem Iterationsschritt wird nur erneut eine limitierte Tiefensuche durchgeführt, während die Suchtiefe um 1 erhöht wird. Abgebrochen wird, sobald eine konsistente Belegung gefunden wird, oder die maximale Suchtiefe erreicht ist. Die Performance des Algorithmus ist ähnlich der normalen Tiefensuche, allerdings ist er durch die Iteration die Optimalität betreffend auch ähnlich gut wie die Breitensuche.
+Da jede Iteration teilweise gleiche Knoten aufgespannt werden müssen wirkt sich das (geringfügig) negativ auf die Laufzeit aus. Kombiniert man die Iterative Tiefensuche mit dem Minmax-Algorithmus, kommt der positive Effekt hinzu, dass man zu jedem Zeitpunkt eine Lösung abrufen kann.
+
+\subsection*{3.b)}
+Die Formel für alle generierten Knoten der Iterativen Tiefensuche ist:\\
+$N_{ITS}=\sum\limits_{i=0}^{d} (d+1-i)b^i$, mit d = Tiefe und b=Verzweigung\\
+Einsetzen ergibt:\\
+$\sum\limits_{i=0}^{5^5} (5^5+1-i)35^i \approx 1,08 \cdot 10^193$\\
+
+Für die limitierte Tiefensuche gilt:\\
+$N_{LTS}=\sum\limits_{i=0}^{d} b^i$\\
+Einsetzen ergibt:\\
+$\sum\limits_{i=0}^{5^5} 35^i \approx 1,05 \cdot 10^193$\\
+
+Das ergibt für den Overhead $\approx 2,8\%$
+
+\subsection*{3.c)}
+Je höher der Verzweigungsfaktor ist, desto kleiner ist der Overhead. Also eignet sich iterative Tiefensuche eher bei hohem Verzweigungsfaktor. Dieser Effekt kommt daher, dass bei Bäumen mit hohem Verzweigungsfaktor die Knoten in der maximale Tiefe (also den noch nicht erzeugten Knoten), einen sehr großen Teil des Baumes ausmachen. Je mehr Iteration man macht, desto größer wird dieser Anteil.
+
 \section*{Aufgabe 5}
 Bei den Aufgaben a) bis c) ist die Zul\"assigkeit verschiedener Metriken als Heuristik zu zeigen. Eine Heuristik $h$ ist zul\"assig, wenn $0 = h(X) = h^\ast(X)$ f\"ur alle Knoten $X$, wobei $h^\ast$ die tats\"achlichen Kosten bezeichnet.
 
