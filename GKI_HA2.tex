@@ -51,7 +51,21 @@
   \begin{center}
         \large\textsl{Tao Xu, 343390 - Mitja Richter, 324680 - Björn Kapelle, 320438 - Marcus Weber, 320402}\\
   \end{center}
+\section*{Aufgabe 1}
+\subsection*{1.a)}
+javadoc befindet sich unter eight queens/doc/1a.pdf\\
 
+Backtracking wurde allein in der Klasse QueensBT gelöst. Die Variablen $Q_1-Q_n$ werden in einem n-stelligem Integer-Array gespeichert. Mithilfe der rekursiven Funktion solveBT, wird dieses der Reihe nach durchiteriert. Sobald für die letzte Stelle des Arrays eine valide Zahl gefunden wird beendet sich der Algorithmus.\\
+
+Für das Forwardchecking und AC3 benötigen wir eine andere Datenstruktur, da wir die Variablen nicht mehr der Reihe nach durchgehen können. Deswegen wird die Klasse Queen benutzt die die aktuelle Position einer Spalte und deren Domain beinhaltet. 
+Die main-Methode befindet sich in der Klasse QueensFCAC und benötigt als Übergabeparameter einen Modus: "`1"' für FC+MRV, "`2"' für AC3+MRV und "`0"' für normales Backtracking (nur mit eigener Datenstruktur). Des Weiteren ist QueensFCAC ähnlich wie QueensBT aufgebaut, außer der zusätzlichen Funktionen für MRV, FC und AC3 und dass die Variablen nun  in einem Array von Queens gespeichert werden, deren Reihenfolge geändert werden kann.\\
+
+\subsection*{1.b)}
+\includegraphics[width=9cm]{btk}
+\includegraphics[width=9cm]{btz}\\
+\includegraphics[width=9cm]{fcack}
+\includegraphics[width=9cm]{fcacz}\\
+Normales Backtracking stößt schnell an seine Grenzen, da ohne Auswahl- und Reduktionsmechanismus sowohl die Bearbeitungszeit, als auch die erzeugten Knoten rasant steigen. Mit Forwardchecking und MRV gibt es eine massive Reduktion in beiden Bereichen, da nur noch ein kleiner Teil des Baumes aufgespannt werden muss. Mit AC3 und MRV wird die Knotenanzahl noch einmal reduziert, d.h. der aufzuspannende Baum ist noch einmal kleiner geworden. Allerdings ist die Berechnung dafür relativ aufwändig, sodass im Vergleich zu FC+MRV die Bearbeitungszeit schon signifikant gestiegen ist. Beide Verfahren haben jedoch massive Vorteile gegenüber Backtracking alleine.
 
 \section*{Aufgabe 2}
 \subsection*{2.a)}
