@@ -1,0 +1,184 @@
+\documentclass[a4paper]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{polynom}
+\usepackage{pgf,tikz}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathcomp}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{dsfont}
+\usepackage{
+    amscd,
+    amsfonts,
+    amsmath,
+    amssymb,
+    amsthm,
+}
+\usepackage{tikz}
+\usepackage{stmaryrd}
+\usepackage{ulsy}
+
+\newcommand{\IR}{\mathbb{R}}
+
+\usetikzlibrary{trees,decorations,arrows,automata,shadows,positioning,plotmarks}
+\geometry{left=2cm, top=1.5cm, right=2cm, bottom=2cm}
+
+\parindent0pt
+
+\begin{document}
+
+  \begin{flushright}
+    \today
+  \end{flushright}
+  \begin{center}
+    \Large\textbf{{GKI - Hausaufgaben 3}}\\
+  \end{center}
+
+  \begin{center}
+        \large\textsl{Tao Xu, 343390 - Mitja Richter, 324680 - Björn Kapelle, 320438 - Marcus Weber, 320402}\\
+  \end{center}
+\section*{Aufgabe 1}
+
+\subsection*{1.a)}
+Jeder Mensch ist entweder m\"annlich oder weiblich. \\
+$\forall x ( H(x) \Rightarrow ( (M(x) \land \neg W(x)) \lor (\neg M(x) \land W(x)) ) )$
+
+\subsection*{1.b)}
+Anton liebt nur Berta und seine Kinder. \\
+$\forall x (x=Berta \lor K(x,Anton)) \Leftrightarrow L(Anton,x)$
+
+\subsection*{1.c)}
+Niemand ist sein eigenes Kind, und niemand ist das Kind seines Kindes. \\
+$(\neg \exists x K(x,x)) \land (\neg \exists y,z K(z,y) \land K(y,z))$
+
+\subsection*{1.d)}
+Jeder Mensch hat einen Vater und eine Mutter. \\
+$\forall x H(x) \Rightarrow (\exists y W(y) \land K(x,y)) \land (\exists z M(z) \land K(x,z))$
+
+\subsection*{1.e)}
+Alle Kinder werden von ihren Eltern geliebt. \\
+$\forall x,y K(x,y) \Rightarrow L(y,x)$
+
+\subsection*{1.f)}
+Es gibt genau einen Menschen, der Christian liebt. \\
+$(\exists x H(x) \land L(x,Christian)) \land (\forall y,z \neg L(y,Christian) \lor \neg L(z,Christian))$
+
+\subsection*{1.g)}
+Der alte \S 146 StGB lautet: \glqq Wer Banknoten nachmacht oder verf\"alscht oder nachgemachte oder verf\"alschte sich verschafft und in Verkehr bringt, wird mit Freiheitsstrafe nicht unter 2 Jahren bestraft.\grqq \\
+Formulieren Sie mindestens zwei g\"ultige Varianten in Pr\"adikatenlogik und erkl\"aren Sie, warum der Paragraph inzwischen umformuliert wurde. \\
+
+
+\subsection*{1.h)}
+Definition von Primzahlen: \glqq Eine ganze Zahl ist genau dann eine Primzahl, wenn sie nur durch eins und sich selbst teilbar ist.\grqq \\
+Wir definieren uns folgende Pr\"adikate:\\
+$Prime(x)$ - $x$ ist eine Primzahl \\
+$Divide(x,y)$ - $x$ ist durch $y$ teilbar \\
+\\
+$\forall x Prime(x) \Leftrightarrow \forall y (Divide(x,y) \Leftrightarrow (y=1 \lor y=x))$
+
+\subsection*{1.i)}
+Die Goldbach-Vermutung: \glqq Jede gerade nat\"urliche Zahl ist Summe zweier Primzahlen \grqq . \\
+Wir definieren uns folgende Pr\"adikate und Funktionen: \\
+$Evennumber(x)$ - $x$ ist eine gerade nat\"urliche Zahl \\
+$Prime(x)$ - $x$ ist eine Primzahl \\
+$Sum(x,y)$ - $x + y$ \\
+$Equal(x,y)$ - $x = y$ \\
+\\
+$\forall x Evennumber(x) \Rightarrow \exists y,z Prime(y) \land Prime(z) \land Equal(x,Sum(y,z))$ 
+
+\subsection*{1.j)}
+Das Epsilon-Delta-Kriterium der Stetigkeit einer Funktions $f$: 
+\glqq F"ur alle positive $\varepsilon$ gibt es ein positives $\delta$, so dass f\"ur alle $x$ im Definitionsbereich von $f$ gilt: $\left| x - x_0 \right| < \delta$ folgt $\left| f(x) - f(x_0) \right| < \varepsilon$.\grqq \\
+Wir definieren uns folgende Pr\"adikate und Funktionen: \\
+$Continuous(f,x,D)$ - $f : D \rightarrow  \mathbb{R} $ ist stetig in $x_0 \in D$ \\
+$Diff(x,y)$ - $x - y$ \\
+$Abs(x)$ - $\left| x \right|$ \\
+$Smaller(x,y)$ - $x < y$ \\
+$In(x,D)$ - $x \in D$ \\
+\\
+$(\forall \varepsilon \exists \delta \forall x  \forall x_0 Smaller(0,\varepsilon) \land Smaller(0,\delta) \land In(x,D) \land In(x_0,D) \land Smaller(Abs(Diff(x,x_0)) , \delta)$ 
+
+$\Rightarrow Smaller(Abs(Diff(f(x),f(x_0))) , \varepsilon)) \Leftrightarrow Continuous(f,x,D)$
+
+\newpage
+
+\section*{Aufgabe 4}
+
+Wir definieren folgende Konstanten:\\
+\\
+Arthur - kurz: A,
+
+Betsy - kurz: B,
+
+Clemence - kurz: C\\
+\\
+Weiterhin ben\"otigen wir folgende Pra\"dikate:\\
+\\
+Unschuldig (x) - kurz: U(x)
+
+vonDiamantenErz\"ahlt(x) - kurz: D(x)
+
+hatGeldsorgen(x) - kurz: G(x)
+
+warAufDemLandsitz(x) - kurz: L(x)\\
+\\
+Arthurs Aussage l\"asst sich formulieren als:
+
+$U(A) \Rightarrow \forall x D(x) \land G(C)$ bzw. in KNF: $\{\neg U(A), D(x)\}, \{\neg U(A), G(C)\}$\\
+\\
+Betsys Aussage l\"asst sich formulieren als:
+
+$U(B) \Rightarrow \neg L(B) \land \neg D(B)$ bzw. in KNF: $\{\neg U(B), \neg L(B)\}, \{\neg U(B), \neg D(B)\}$\\
+\\
+Clemences Aussage l\"asst sich formulieren als:
+
+$U(C) \Rightarrow \forall x L(x)$ bzw. in KNF: $\{\neg U(C), L(x)\}$\\
+\\
+Au{\ss}erdem muss der Dieb auf dem Landsitz gewesen sein: 
+
+$\forall x \neg U(x) \Rightarrow L(x)$ bzw. in KNF$^\ast$: $\{ U(x), L(x)\}$\\
+\\
+Und der Dieb muss von den Diamanten gewusst haben:
+
+$\forall x \neg U(x) \Rightarrow D(x)$ bzw. in KNF$^\ast$: $\{ U(x), D(x)\}$\\
+\\
+Desweiteren wissen wir, dass es genau einen Dieb gibt:
+
+$\neg U(A) \lor \neg U(B) \lor \neg U(C)$ bzw. in KNF: $\{ \neg U(A), \neg U(B), \neg U(C)\}$\\
+\\
+Damit erhalten wir die Wissensbasis:
+
+$KB = \{\{\neg U(A), D(x)\}, \{\neg U(A), G(C)\}, \{\neg U(B), \neg L(B)\}, \{\neg U(B), \neg D(B)\}, \{\neg U(C), L(x)\},$
+
+			  $\{ U(x), L(x)\}, \{ U(x), D(x)\}, \{ \neg U(A), \neg U(B), \neg U(C)\}\}$\\
+			  
+Bevor wir zum Resolutionsbeweis kommen, machen wir ein \textit{educated guess} wer der Dieb ist:\\
+\\
+Es kann nicht Arthur sein. Denn dann m\"ussten Betsy und Clemence die Wahrheit sagen, aber deren Aussagen widersprechen sich bez\"uglich der Anwesenheit auf dem Landsitz. Der Dieb kann auch nicht Clemence sein. Denn dann m\"ussten Arthur und Betsy die Wahrheit sagen, aber deren Aussagen widersprechen sich bez\"uglich des Wissens \"uber die Diamanten. Der Dieb muss also Betsy sein, was wir im folgenden beweisen werden.\\
+\\
+Wir beweisen also $\{\neg U(B)\}$ per Resolution, d.h. wir f\"uhren die Negation $\{U(B)\}$ zum Widerspruch mit der Wissensbasis.\\
+\\
+Schritt 1: Wir unifizieren $\{U(B)\}$ mit $\{\neg U(B), \neg L(B)\}$ und erhalten $\{\neg L(B)\}$, welches wir der St\"utzmenge hinz\"ufugen.\\
+\\
+Schritt 2: Wir unifizieren $\{\neg L(B)\}$ mit $\{ U(x), L(x)\}$ und erhalten durch die Substitution $x/B$ dann $\{ U(B)\}$, welches wir der St\"utzmenge hinz\"ufugen.\\
+
+Schritt 3: Wir unifizieren $\{ U(B)\}$ mit $\{\neg U(B)\}$ und erhalten $\{ \}$, womit der Beweis abschlie{\ss}t.\\
+
+Anmerkung zu $^\ast$: Eigentlich m\"usste man in den beiden Aussagen die Existenzquantoren dadurch beseitigen, dass man neu definierte Konstanten einsetzt. Uns ist allerdings nicht klar wie diese Aussagen dann noch im Resolutionsbeweis verwendet werden sollen.
+
+
+\end{document}
