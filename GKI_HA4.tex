@@ -1,0 +1,166 @@
+\documentclass[a4paper]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{polynom}
+\usepackage{pgf,tikz}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathcomp}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{dsfont}
+\usepackage{
+    amscd,
+    amsfonts,
+    amsmath,
+    amssymb,
+    amsthm,
+}
+\usepackage{tikz}
+\usepackage{stmaryrd}
+\usepackage{ulsy}
+
+\newcommand{\IR}{\mathbb{R}}
+\newcommand{\IN}{\mathbb{N}}
+\newcommand{\entspricht}{\stackrel{\scriptscriptstyle\wedge}{=}}
+
+\usetikzlibrary{trees,decorations,arrows,automata,shadows,positioning,plotmarks}
+\geometry{left=2cm, top=1.5cm, right=2cm, bottom=2cm}
+
+\parindent0pt
+
+\begin{document}
+
+  \begin{flushright}
+    \today
+  \end{flushright}
+  \begin{center}
+    \Large\textbf{{GKI - Hausaufgaben 4}}\\
+  \end{center}
+
+  \begin{center}
+        \large\textsl{Tao Xu, 343390 - Mitja Richter, 324680 - Björn Kapelle, 320438 - Marcus Weber, 320402}\\
+  \end{center}
+\section*{Aufgabe 1}
+\subsection*{1.a)}
+Wir w\"ahlen folgende Konstanten:\\
+\\
+K=\{A, R1, R2, R3, H, C1, C2, C3\}\\
+\\
+Dabei steht:\\
+A f\"ur den Agenten, sprich den Roboter;\\
+R1, R2, R3 f\"ur die einzelnen R\"aume;\\
+H f\"ur den Gang;\\
+C1, C2, C3 f\"ur die Kisten.\\
+\\
+Weiterhin haben wir folgende Pr\"adikate:\\
+\\
+P=\{Room/1, Item/1, Open/1, Closed/1, Carry/1, Clear/1, In/2\}\\
+\\
+Diese geben an:\\
+Room(x) $\entspricht$ x ist einer der drei R\"aume;\\
+Item(x) $\entspricht$ x ist ein Gegenstand;\\
+Open(x) $\entspricht$ x ist offen;\\
+Closed(x) $\entspricht$ x ist geschlossen;\\
+Carry(x) $\entspricht$ x wird vom Agenten getragen;\\
+Clear(x) $\entspricht$ x tr\"agt keine Gegenst\"ande;\\
+In(x,y) $\entspricht$ x befindet sich in y.\\
+\\
+Daraus ergibt sich folgender Startzustand:\\
+\\
+$S_0$ = \{Room(R1), Room(R2), Room(R3), Item(C1), Item(C2), Item(C3), Closed(R1), Closed(R2), Closed(R3),
+In(A,R1), In(C1, R1), In(C2, R2), In(C3, R3), Clear(A)\}\\
+\\
+Und folgender Zielzustand:\\
+\\
+$S_z$ = \{In(C1, R1), In(C2, R1), In(C3, R1)\}\\
+\\
+Folgende Aktionsschemata stehen zur Verf\"ugung:\\
+\\
+ACT: moveIn(r)\\
+PRE: Room(r), Open(r), In(A,h)\\
+ADD: In(A,r)\\
+DEL: In(A,H)\\
+Bem: Agent bewegt sich vom Gang in den Raum r\\
+\\
+ACT: moveOut(r)\\
+PRE: Room(r), Open(r), In(A,r)\\
+ADD: In(A,H)\\
+DEL: In(A,r)\\
+Bem: Agent bewegt sich vom Raum r in den Gang\\
+\\
+ACT: open(r)\\
+PRE: Room(r), Closed(r), Clear(A)\\
+ADD: Open(r)\\
+DEL: Closed(r)\\
+Bem: Agent \"offnet Raum r\\
+\\
+ACT: close(r)\\
+PRE: Room(r), Open(r)\\
+ADD: Closed(r)\\
+DEL: Open(r)\\
+Bem: Agent schlie{\ss}t Raum r\\
+\\
+ACT: put(i)\\
+PRE: Item(i), Carry(i), Room(r), In(A,r)\\
+ADD: In(i,r), Clear(A)\\
+DEL: Carry(i)\\
+Bem: Agent legt Gegenstand i im Raum r ab\\
+\\
+ACT: take(i)\\
+PRE: Item(i), Room(r), In(i,r), In(A,r), Clear(A)\\
+ADD: Carry(i)\\
+DEL: In(i,r), Clear(A)\\
+Bem: Agent nimmt Gegenstand i im Raum r auf\\
+\\
+Dieses Modell nimmt zur Vereinfachung an, dass der Agent keine Gegenst\"ande im Gang ablegen bzw. aufnehmen kann. Dies erscheint plausibel, da der Agent die Kisten lediglich zwischen den R\"aumen hin und her transportieren soll. Andernfalls m\"usste man noch zus\"atzliche Aktionsschemata f\"ur put und take sowie ein zus\"atzliches Pr\"adikat f\"ur In/2 definieren. 
+
+\subsection*{1.b)}
+i) In $S_0$ anwendbar sind: \{open(R1), open(R2), open(R3), take(C1)\}\\
+\\
+ii) Der Plan [take(C1), put(C1)] endet mit einer konsistenten und relevanten Aktion, denn put(C1) ist konsistent, denn es entfernt keines der drei Atome, welche im Zielzustand enthalten sind und put(C1) ist relevant, denn es f\"ugt In(C1,R1) hinzu, welches zu diesem Zeitpunkt nicht im aktuellen Zustand enthalten ist.\\
+\\
+iii) Der Plan [take(C1)] endet mit einer nicht konsistenten Aktion, denn take(C1) entfernt das Atom In(C1,R1), welches im Zielzustand enthalten ist.
+
+\subsection*{1.c)}
+i) Prinzipiell kommen alle Aktionen in Frage, die ein In/2 im ADD haben. Davon scheiden aber moveIn und moveOut aus, denn deren In/2 sind bereits mit der Konstante A belegt. Es bleibt nur put \"ubrig. Zielf\"uhrende Aktionen sind daher put(C1,R1), put(C2, R2) und put(C3,R3).\\
+\\
+ii) In unserem Modell resultieren keine Aktionen aus i) in unm\"ogliche Vorg\"angerzust\"ande $S_{Z-1}$.\\
+\\
+iii) F\"ur die letzte Aktion put(C1,R1) lautet der Vorg\"angerzustand $S_{Z-1}$:\\
+\\
+$S_{Z-1}$ = \{In(C2,R2), In(C3,R3), Carry(C1)\}\\
+\\
+F\"ur die vorletzte Aktion moveIn(R1) lautet der Vorg\"angerzustand $S_{Z-2}$:\\
+\\
+$S_{Z-2}$ = \{In(C2,R2), In(C3,R3), Carry(C1), In(A,H)\}\\
+
+\subsection*{1.d)}
+Man br\"auchte ein zus\"atzliches Pr\"adikat Energy(x), welches den vorhandenen Energievorrat des Agenten beschreibt. Dazu k\"oennte man Konstanten 0,..,M $\in \IN$ einf\"uhren, die eine Skala f\"ur die Energie beschreiben. 0 hie{\ss}e dann gar keine Energie und M maximale Energie. Problematisch ist die Modellierung der Energieabnahme, da STRIPS keine arithmetischen Operationen kennt. Eine (zugegebener Ma{\ss}en unsch\"one) M\"oglichkeit dies zu l\"osen, w\"are jede Aktion f\"ur jedes Energielevel zu definieren. Statt der oben definierten moveIn(r) erhielte man dann z.B. f\"ur das Energielevel 1:\\
+\\
+ACT: moveIn(r)\\
+PRE: Room(r), Open(r), In(A,h), Energy(1)\\
+ADD: In(A,r), Energy(0)\\
+DEL: In(A,H), Energy(1)\\
+Bem: Agent bewegt sich vom Gang in den Raum r\\
+\\
+Analog f\"ur jede andere Konstante k = 1,...,M und jede andere Aktion. Der gew\"unschte Effekt w\"are dann, dass bei Energy(0) keine PRE's mehr erf\"ullt und der Agent damit handlungsunf\"ahig w\"are. Nachteil dieser Methode ist aber, dass sich die Anzahl der Aktionen ver-M-facht, was insbesondere bei gro{\ss}em M ein Problem darstellen k\"onnte.
+
+\subsection*{1.e)}
+Die Auswirkungen auf die Vorw\"artsplanung w\"aren gering, da das Energielevel im Startzustand bekannt sein muss und man dann in jedem Schritt nur genauso viele m\"ogliche Aktionen wie im urspr\"unglichen Modell h\"atte. Es best\"unde aber nat\"urlich die Gefahr, dass der Agent handlungsunf\"ahig wird, bevor er den Zielzustand erreicht. \\
+\\
+Die R\"uckw\"artsplanung hingegen h\"atte pl\"otzlich einen viel gr\"o{\ss}eren Verzweigungsgrad, da im Zielstand nichts \"uber das Energielevel bekannt ist und demnach jede Aktion f\"ur alle M Energielevel durchprobiert werden m\"usste.
+
+\end{document}
