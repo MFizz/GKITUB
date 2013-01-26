@@ -1,0 +1,149 @@
+\documentclass[a4paper]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{polynom}
+\usepackage{pgf,tikz}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathcomp}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{dsfont}
+\usepackage{eurosym}
+\usepackage{
+    amscd,
+    amsfonts,
+    amsmath,
+    amssymb,
+    amsthm,
+}
+\usepackage{tikz}
+\usepackage{stmaryrd}
+\usepackage{ulsy}
+
+
+\begin{document}
+
+  \begin{flushright}
+    \today
+  \end{flushright}
+  \begin{center}
+    \Large\textbf{{GKI - Hausaufgaben 5}}\\
+  \end{center}
+
+  \begin{center}
+        \large\textsl{Tao Xu, 343390 - Mitja Richter, 324680 - Björn Kapelle, 320438 - Marcus Weber, 320402}\\
+  \end{center}
+  
+\section*{Aufgabe 1}
+
+\subsection*{1.a)}
+
+\subsection*{1.b)}
+
+\section*{Aufgabe 2}
+
+\subsection*{2.a)}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width = 1\columnwidth]{blatt6aufgabe2a}
+\end{figure}
+
+\subsection*{2.b)}
+\glqq He\grqq $\in$ \{Subjekt\} \\
+\glqq shoots\grqq $\in$ \{Verb\} \\
+\glqq the\grqq $\in$ \{Artikel\} \\
+\glqq unwell\grqq $\in$ \{Adjektiv(1), Adjektiv(2)\} \\
+\glqq well\grqq $\in$ \{Adjektiv(1), Nomen, Adverb, Adjektiv(2)\} \\
+\glqq badly\grqq $\in$ \{Adverb\} \\
+\pagebreak
+Daraus folgt das folgende Bild.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width = 1\columnwidth]{blatt6aufgabe2b}
+\end{figure}
+
+Die einzigen möglichen Folgen von Wortarten beschreiben Pfade von der Wurzel (Subjekt) zum Blatt (Satzende) bei dem jede Kante eine positive Wahrscheinlichkeit hat.
+Es gibt nur einen Pfad, der das erf\"ullt: Subjekt-Verb-Artikel-Adjektiv(2)-Nomen-Adverb-Satzende. \\
+Insbesondere gibt es damit eine M\"oglichkeit diesen Satz zu bilden. \\
+Im weiteren verwenden wir Abkürzungen:  \\
+Sub - Subjekt \\
+Ver - Verb \\
+Hil - Hilfsverb \\
+Art - Artikel \\
+Adj(2) - Adjektiv(2) \\
+Nom - Nomen \\
+Adv - Adverb \\
+SE - Satzende \\
+\\
+$P($passende Wortartenfolge$)$
+$= P(x_0=Sub, x_1=Ver, x_2= Art, x_3=Adj(2), x_4=Nom, x_5=Adv, x_6=SE)$ \\
+$= P(Ver | Sub)  P(Art | Ver) P(Adj(2) | Art) P(Nom | Adj(2)) P(Adv | Nom) P(SE | Adv)$ \\
+$= 0,8 \cdot 0,5 \cdot 0,2 \cdot 0,9 \cdot 0,2 \cdot 0,8$ \\
+$= 0,1152$ \\
+\\
+Das ist allerdings nur die Wahrscheinlichkeit für die passende Folge von Wortarten. Diese muss nun mit den Einzelwahrscheinlichkeiten für die Worte noch multipliziert werden. \\
+$P($ \glqq He shoots the unwell well badly.\grqq $)$ \\
+$= P(passende Wortartenfolge) \cdot P(He | Sub) \cdot P(shoots | Ver) \cdot P(the | Art) \cdot P(unwell | Adj(2)) \cdot P(well | Nom) \cdot P(badly | Adv)$ \\
+$= 0,1152 \cdot 0,5 \cdot 0,5 \cdot 0,6 \cdot 0,5 \cdot 0,4 \cdot 0,5$
+$= 0,0001728 = 0,01728 \%$ \\
+\\
+Die Wahrscheinlichkeit f\"ur den Satz \glqq He shoots the unwell well badly.\grqq betr\"agt 0,01728 \%.
+
+\subsection*{2.c)}
+$y_0 = She \Rightarrow x_0 \in \{Subjekt\}$ \\
+$y_1 = is \Rightarrow x_1 \in \{Verb, Hilfsverb\}$ \\
+$\Rightarrow x_2 \in \{Artikel, Adverb, Satzende, Adjektiv(1)\}$ \\
+\\
+$x_4 = Satzende \Rightarrow x_3 \in \{Verb, Adjektiv(1), Nomen, Adverb\}$ \\
+$y_3 = well \Rightarrow x_3 \in \{Adjektiv(1), Nomen, Adverb, Adjektiv(2)\}$ \\
+$\Rightarrow x_3 \in \{Adjektiv(1), Nomen, Adverb\}$ \\
+$\Rightarrow x_2 \in \{Hilfsverb, Artikel, Adjektiv(2), Verb, Adjektiv(1), Nomen, Adverb\}$ \\
+
+Aus diesen beiden Restriktionen f\"ur $x_2$ kann man folgern, dass: $x_2 \in \{Artikel, Adverb, Adjektiv(1)\}$
+
+
+
+\pagebreak
+\subsection*{2.d)}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width = 1\columnwidth]{blatt6aufgabe2d}
+\end{figure}
+
+S\"atze mit genau 3 W\"ortern entsprechen Pfaden von der Wurzel (Subjekt) zu Blättern, die mit \glqq Satzende\grqq bezeichnet sind und diese Pfade sollen über 3 Kanten gehen. \\
+Hierfür gibt es folgende geordnete Wortartkombinationen: \\
+(i) Subjekt-Hilfsverb-Adjektiv(1)-Satzende
+(ii) Subjekt-Verb-Adverb-Satzende
+
+$P($ Satz mit genau 3 W\"ortern $) = P(x_0 =Sub,x_1=Hil,x_2=Adj(1),x_3=SE)+P(x_0=Sub,x_1=Ver,x_2=Adv,x_3=SE)$ \\
+$= P(Hil | Sub) \cdot P(Adj(1) | Hil) \cdot P(SE | Adj(1))+P(Ver | Sub) \cdot P(Adv) | Ver) \cdot P(SE | Adv)$ \\
+$=0,2 \cdot 1 \cdot 0,8 + 0,8 \cdot 0,2 \cdot 0,8$ \\
+$= 0,16 + 0,128 = 0,288$ \\
+\\
+Die Wahrscheinlichkeit f\"ur einen Satz mit genau 3 W\"ortern betr\"agt 28,8 \%. \\
+\\
+$M((i))$ bezeichne die Menge der M\"oglichkeiten f\"ur den Fall (i) und $| M(i)|$ bezeichne die Anzahl an M\"oglichkeiten f\"ur den Fall (i), , f\"ur (ii) analog.\\
+Mit $| Wortart |$ bezeichnen wir die Anzahl m\"oglicher Worte aus der Wortart. \\
+$|M(i)| = |Subjekt| \cdot |Hilfsverb| \cdot |Adjektiv(1)| = 2^3 = 8$ \\
+$|M(ii)| = |Subjekt| \cdot |Verb| \cdot |Adverb| = 2^3 = 8$ \\
+Die Gesamtanzahl an M\"oglichkeit ergibt sich aus: $|M((i))| + |M((ii))|- |M((i)) \cap M((ii))|$
+Dazu betrachte: $Subjekt \cap Subjekt = \{ He, She \}$ \\
+$Hilfsverb \cap Verb = \{is\}$ \\
+$Adjektiv(1) \cap Adverb = \{well\}$ \\
+$\Rightarrow |M((i)) \cap M((ii))| = |Subjekt \cap Subjekt| \cdot |Hilfsverb \cap Verb| \cdot |Adjektiv(1) \cap Adverb| = 2$ \\
+$\Rightarrow$ Anzahl verschiedener M\"oglichkeiten f\"ur einen Satz mit genau 3 W\"ortern $= 8+8-2 = 14$
+
+\end{document}
