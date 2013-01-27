@@ -50,15 +50,48 @@
 \section*{Aufgabe 1}
 
 \subsection*{1.a)}
+Iterative Berechnung für Filterverteilung f:\\
+ohne Beobachtung von $Y_t$:\\
 
+$f_t= P(X_t=w|Y_1,...,Y_t) =\\ P(X_t=w|X_{t-1}=w)f_{t-1} + P(X_t=w|X_{t-1}=f)(1-f_{t-1}) = \\
+0,8f_{t-1} +0,2(1-f_{t-1}) =\\
+0,6f_{t-1}+0,2$\\
+
+Mit Beobachtung von $Y_t$:\\
+$P(X_t=w|Y_1,...,Y_t) = \\
+\frac{P(Y_t=c\cup Y_t=g|X_t=w)f_t}{P(Y_t=c\cup Y_t=g|X_t=f)(P(X_t=f|X_{t-1}=w)f_{t-1} + P(X_t=f|X_{t-1}=f)(1-f_{t-1})) + P(Y_t=c\cup Y_t=g|X_t=w)f_t}=\\$
+$\frac{0,3(0,8f_{t-1} +0,2(1-f_{t-1}))}{0,3(0,8f_{t-1} +0,2(1-f_{t-1}))+0,2(0,2f_{t-1} +0,8(1-f_{t-1}))} $=\\
+$\frac{0,06+0.18f_{t-1}}{0,22+0,06f_{t-1}}
+$\\
+
+Bedingung für stationäre Verteilung: $f_t = f_{t-1}$\\
+Und es gilt $f_t=\frac{0,06+0.18f_{t-1}}{0,22+0,06f_{t-1}}$\\
+also muss gelten $x=\frac{0,06+0.18x}{0,22+0,06x}\\
+\Leftrightarrow 0=p^2+\frac{2}{3}p-1\\
+x_1=-1,3874\\
+x_2=0,72076
+$\\
+
+Das HMM hat eine stationäre Verteilung. Für $t\rightarrow \infty$ gilt\\
+$ P(X_t=w|Y_1,...,Y_t)=0,72076$
 \subsection*{1.b)}
+$f_0 = 0,5$\\
+$f_1=\frac{0,06+0.18\cdot 0,5}{0,22+0,06\cdot 0.5} = 0,6$\\
+$f_2=\frac{0,06+0.18\cdot 0,5}{0,22+0,06\cdot 0.5}$\approx 0,656\\
+$f_3\approx 0,6\cdot 0,656 + 0,2 \approx 0,594\\
+$f_4\approx 0,6\cdot 0,594 + 0,2 \approx 0,556\\
 
+\subsection*{1.c)}
+Eingesetzt in die Bedingung für stationäre Verteilung erhält man:\\
+$x=0,6x+0,2$\\
+$x=0,5$\\
+Es konvergiert für $t\rightarrow \infty$ gegen 0,5. Die anfänglichen Beobachtungen spielen keine Rolle.
 \section*{Aufgabe 2}
 
 \subsection*{2.a)}
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width = 1\columnwidth]{blatt6aufgabe2a}
+g\includegraphics[width = 1\columnwidth]{blatt6aufgabe2a}
 \end{figure}
 
 \subsection*{2.b)}
