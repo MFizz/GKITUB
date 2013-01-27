@@ -86,6 +86,40 @@ Eingesetzt in die Bedingung für stationäre Verteilung erhält man:\\
 $x=0,6x+0,2$\\
 $x=0,5$\\
 Es konvergiert für $t\rightarrow \infty$ gegen 0,5. Die anfänglichen Beobachtungen spielen keine Rolle.
+
+\subsection*{1.e)}
+\begin{tabular}{c|cccc}
+    & a 		& c 			& g 			& t 			\\
+\hline
+w	& 0,1		& 0,021 (w)		& 0,00441 (w)		& 0,0006174 (w)	\\
+f 	& 0,15		& 0,024 (f)		& 0,00384 (f)		& 0,0009216 (f)	\\
+\end{tabular}
+
+Zur Erkl\"arung dieser Tabelle.
+Wir beschreiben hier aus Gr\"unden der Einfachheit nur die ersten zwei Spalten.
+Die erste Spalte ergibt sich aus: $\frac{P(Y_0=a|X_0=Zustand)}{2}$
+F\"ur Zustand kann einerseits $w$ eingesetzt werden, das ergibt den Wert in der mit $w$ gekennzeichneten Zeile. \\
+Analog f\"ur die Zeile mit $f$. Der Nenner ergibt sich aus der Gesamtanzahl der Zust\"ande, in diesem Fall gibt es die Zust\"ande $w$ und $f$ und somit insgesamt 2. \\
+$Y_0=a$ ergibt sich aus der gegeben Sequenz.\\
+\\
+Zur Berechnung der zweiten Spalte (und der weiteren Spalten): \\
+man sucht in der $w$-Zeile das Maximum von: $max_{i \in \{w,f\}} v_{i,1} \cdot P(X_1=w | X_0= i) \cdot P(Y_1=c | X_1 = w)$ \\
+$v_{i,k}$ beschreibt den Wert in Zeile $i$ und Spalte $k$, im Fall $v_{w,1}$ also z.B. den Wert $0,1$. \\
+Die Beschreibung (w) oder (f) dahinter beschreibt welchen Zustandl vorher gewesen sein muss. 
+\\
+Rechnungen f\"ur $w$-Zeile: $0,1 \cdot 0,7 \cdot 0,3 = 0,021$  \\
+und $0,15 \cdot 0,2 \cdot 0,3 = 0,009$ \\
+Das Maximum dieser beiden ist der Wert $0,021$ \\
+Da dies im Fall $i = w$ war, muss vorher der Fall $w$ gewesen sein. \\
+\\
+F\"ur die $f$-Zeile analog: $max_{i \in \{w,f\}} v_{i,1} \cdot P(X_1=f | X_0= i) \cdot P(Y_1=c | X_1 = f)$ \\
+Rechnungen f\"ur $f$-Zeile: $0,1 \cdot 0,3 \cdot 0,2 = 0,006$  \\
+und $0,15 \cdot 0,8 \cdot 0,2 = 0,024$ \\
+Das Maximum dieser beiden ist der Wert $0,021$ \\
+Da dies im Fall $i = f$ war, muss vorher der Fall $f$ gewesen sein. \\
+\\
+Da in der letzten Spalte der h\"ochste Wert in der $f$-Zeile vorhanden ist, ergibt sich, dass $X_3 = f$ und von da aus r\"uckwirkend die Zustandsfolge $X_0 = f, X_1=f, X_2=f, X_3=f$ die wahrscheinlichste für die gegebene Sequenz ist.
+
 \section*{Aufgabe 2}
 
 \subsection*{2.a)}
