@@ -1,0 +1,90 @@
+\documentclass[a4paper]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{polynom}
+\usepackage{pgf,tikz}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathcomp}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{dsfont}
+\usepackage{eurosym}
+\usepackage{
+    amscd,
+    amsfonts,
+    amsmath,
+    amssymb,
+    amsthm,
+}
+\usepackage{tikz}
+\usepackage{stmaryrd}
+\usepackage{ulsy}
+
+
+\begin{document}
+
+  \begin{flushright}
+    \today
+  \end{flushright}
+  \begin{center}
+    \Large\textbf{{GKI - Hausaufgaben 5}}\\
+  \end{center}
+
+  \begin{center}
+        \large\textsl{Tao Xu, 343390 - Mitja Richter, 324680 - Björn Kapelle, 320438 - Marcus Weber, 320402}\\
+  \end{center}
+  
+\section*{Aufgabe 1}
+
+\subsection*{1.a)}
+Iterative Berechnung für Filterverteilung f:\\
+ohne Beobachtung von $Y_t$:\\
+
+$f_t= P(X_t=w|Y_1,...,Y_t) =\\ P(X_t=w|X_{t-1}=w)f_{t-1} + P(X_t=w|X_{t-1}=f)(1-f_{t-1}) = \\
+0,7f_{t-1} +0,2(1-f_{t-1}) =\\
+0,5f_{t-1}+0,2$\\
+
+Mit Beobachtung von $Y_t$:\\
+$P(X_t=w|Y_1,...,Y_t) = \\
+\frac{P(Y_t=c\cup Y_t=g|X_t=w)f_t}{P(Y_t=c\cup Y_t=g|X_t=f)(P(X_t=f|X_{t-1}=w)f_{t-1} + P(X_t=f|X_{t-1}=f)(1-f_{t-1})) + P(Y_t=c\cup Y_t=g|X_t=w)f_t}=\\$
+$\frac{0,3(0,7f_{t-1} +0,2(1-f_{t-1}))}{0,3(0,7f_{t-1} +0,2(1-f_{t-1}))+0,2(0,3f_{t-1} +0,8(1-f_{t-1}))} $=\\
+$\frac{0,06+0.15f_{t-1}}{0,22+0,05f_{t-1}}
+$\\
+
+Bedingung für stationäre Verteilung: $f_t = f_{t-1}$\\
+Und es gilt $f_t=\frac{0,06+0.15f_{t-1}}{0,22+0,05f_{t-1}}$\\
+also muss gelten $x=\frac{0,06+0.15x}{0,22+0,05x}\\
+\Leftrightarrow 0=0,05x^2+0,07x -0,06\\
+x_1=-2\\
+x_2=0,6
+$\\
+
+Das HMM hat eine stationäre Verteilung. Für $t\rightarrow \infty$ gilt\\
+$ P(X_t=w|Y_1,...,Y_t)=0,6$
+\subsection*{1.b)}
+$f_0 = 0,5$\\
+$f_1=\frac{0,06+0.15\cdot 0,5}{0,22+0,05\cdot 0,5} \approx 0,5510$\\
+$f_2\approx \frac{0,06+0,15\cdot 0,5510}{0,22+0,05\cdot 0,5510}\approx 0,5762$\\
+$f_3\approx 0,6\cdot 0,656 + 0,2 \approx 0,4881$\\
+$f_4\approx 0,6\cdot 0,594 + 0,2 \approx 0,4441$\\
+
+\subsection*{1.c)}
+Eingesetzt in die Bedingung für stationäre Verteilung erhält man:\\
+$x=0,5x+0,2$\\
+$x=0,4$\\
+Es konvergiert für $t\rightarrow \infty$ gegen 0,4. Die anfänglichen Beobachtungen spielen keine Rolle.
+
+\end{document}
